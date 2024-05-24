@@ -44,8 +44,8 @@ model Comment{
   id Int @default(autoincrement()) @id
   user User @relation(fields: [userId], references: [id])
   userId Int
-  review Review? @relation(fields: [reviewId], references: [id])
-  reviewId Int?
+  review Review @relation(fields: [reviewId], references: [id])
+  reviewId Int
   content String
   createdAt DateTime
   updatedAt DateTime?
