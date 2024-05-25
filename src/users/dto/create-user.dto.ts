@@ -1,4 +1,5 @@
 import {
+  IsBase64,
   IsEmail,
   IsInt,
   IsNotEmpty,
@@ -10,16 +11,18 @@ import {
 export class CreateUserDto {
   @IsInt()
   id: number;
+  @IsNotEmpty({ message: 'Precisa de Email!!' })
   @IsEmail()
   email: string;
   @IsNotEmpty({ message: 'Precisa de Senha!!' })
   @IsStrongPassword()
   password: string;
+  @IsNotEmpty({ message: 'Precisa de Nome!!' })
   @IsString()
   name: string;
-  @IsString()
+  @IsBase64()
   @IsOptional()
-  picture: string;
+  picture: Buffer;
   @IsString()
   departament: string;
   @IsString()
