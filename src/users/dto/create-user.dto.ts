@@ -9,8 +9,6 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
-  @IsInt()
-  id: number;
   @IsNotEmpty({ message: 'Precisa de Email!!' })
   @IsEmail()
   email: string;
@@ -20,9 +18,8 @@ export class CreateUserDto {
   @IsNotEmpty({ message: 'Precisa de Nome!!' })
   @IsString()
   name: string;
-  @IsBase64()
   @IsOptional()
-  picture: Buffer;
+  picture: string;
   @IsString()
   departament: string;
   @IsString()
