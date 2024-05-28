@@ -1,7 +1,5 @@
 import {
-  IsBase64,
   IsEmail,
-  IsInt,
   IsNotEmpty,
   IsOptional,
   IsString,
