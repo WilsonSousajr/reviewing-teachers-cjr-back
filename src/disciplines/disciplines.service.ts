@@ -1,26 +1,41 @@
 import { Injectable } from '@nestjs/common';
 import { CreateDisciplineDto } from './dto/create-discipline.dto';
 import { UpdateDisciplineDto } from './dto/update-discipline.dto';
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class DisciplinesService {
-  create(createDisciplineDto: CreateDisciplineDto) {
-    return 'This action adds a new discipline';
+  constructor(private readonly prisma: PrismaService){}
+  async create(createDisciplineDto: CreateDisciplineDto) {
+    return await this.prisma.discipline.create({data: createDisciplineDto});
   }
 
-  findAll() {
-    return `This action returns all disciplines`;
+  async findAll() {
+    return await this.prisma.discipline.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} discipline`;
+  async findOne(id: number) {
+    return await this.prisma.discipline.findMany({
+      where: {
+        id
+      }
+    });
   }
 
-  update(id: number, updateDisciplineDto: UpdateDisciplineDto) {
-    return `This action updates a #${id} discipline`;
+  async update(id: number, updateDisciplineDto: UpdateDisciplineDto) {
+    return await this.prisma.discipline.update({
+      where: {
+        id
+      },
+      data: updateDisciplineDto
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} discipline`;
+  async remove(id: number) {
+    return await this.prisma.discipline.delete({
+      where: {
+        id
+      }
+    });
   }
 }
