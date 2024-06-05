@@ -34,8 +34,16 @@ export class ReviewsService {
     return await this.prisma.review.findMany();
   }
 
-  async findOne(id: number) {
+  async findByTeacher(teacherId: number){
     return await this.prisma.review.findMany({
+      where: {
+        teacherId,
+      },
+    });
+  }
+
+  async findOne(id: number) {
+    return await this.prisma.review.findUnique({
       where: {
         id,
       },
