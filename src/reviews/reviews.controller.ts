@@ -17,6 +17,11 @@ export class ReviewsController {
     return this.reviewsService.findAll();
   }
 
+  @Get('/teacher/:teacherId')
+  findByTeacher(@Param('teacherId') teacherId: string) {
+    return this.reviewsService.findByTeacher(+teacherId);
+  }
+  
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.reviewsService.findOne(+id);
