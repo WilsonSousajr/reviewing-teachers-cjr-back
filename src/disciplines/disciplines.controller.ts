@@ -17,6 +17,11 @@ export class DisciplinesController {
     return this.disciplinesService.findAll();
   }
 
+  @Get('name:name')
+  findByName(@Param('name') name: string) {
+    return this.disciplinesService.findByName(name);
+  }
+  
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.disciplinesService.findOne(+id);
