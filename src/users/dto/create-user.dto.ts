@@ -6,7 +6,7 @@ export class CreateUserDto {
   email: string;
 
   @IsNotEmpty({ message: 'Precisa de Senha!!' })
-  @IsStrongPassword()
+  @IsString()
   password: string;
 
   @IsNotEmpty({ message: 'Precisa de Nome!!' })
