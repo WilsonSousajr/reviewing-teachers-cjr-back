@@ -8,7 +8,7 @@ async function migratePasswords() {
     const saltRounds = 10;
 
     for (const user of users) {
-      if (user.password && !user.password.startsWith('$2b$')) { // Verifique se a senha não está hasheada
+      if (user.password && !user.password.startsWith('$2b$')) {
         const hashedPassword = await bcrypt.hash(user.password, saltRounds);
         await prisma.user.update({
           where: { id: user.id },
