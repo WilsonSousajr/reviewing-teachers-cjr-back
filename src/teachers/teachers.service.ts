@@ -14,6 +14,10 @@ export class TeachersService {
     return await this.prisma.teacher.findMany();
   }
 
+  async findByName(name: string) {
+    return await this.prisma.teacher.findFirst({where: {name}})
+  }
+  
   async findOne(id: number) {
     return await this.prisma.teacher.findMany({
       where: {
