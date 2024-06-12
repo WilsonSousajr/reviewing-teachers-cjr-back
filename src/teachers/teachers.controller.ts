@@ -17,6 +17,11 @@ export class TeachersController {
     return this.teachersService.findAll();
   }
 
+  @Get('name:name')
+  findByName(@Param('name') name: string){
+    return this.teachersService.findByName(name);
+  }
+  
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.teachersService.findOne(+id);
