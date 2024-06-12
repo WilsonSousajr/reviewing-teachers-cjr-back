@@ -15,9 +15,10 @@ export class DisciplinesService {
   }
 
   async findByName(name: string) {
-    return await this.prisma.teacher.findFirst({where: {name}})
+    return await this.prisma.discipline.findFirst({where: {name}})
   }
   
+
   async findOne(id: number) {
     return await this.prisma.discipline.findMany({
       where: {
