@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
 import { PrismaService } from 'src/prisma.service';
@@ -6,6 +6,7 @@ import { PrismaService } from 'src/prisma.service';
 @Injectable()
 export class ReviewsService {
   constructor(private readonly prisma: PrismaService) {}
+
   async create(createReviewDto: CreateReviewDto) {
     return await this.prisma.review.create({
       data: {
@@ -34,44 +35,40 @@ export class ReviewsService {
     return await this.prisma.review.findMany();
   }
 
-  async findByTeacher(teacherId: number){
+  async findByTeacher(teacherId: number) {
     return await this.prisma.review.findMany({
-      where: {
-        teacherId,
-      },
+      where: { teacherId },
     });
   }
-  
-  async findByUser(userId: number){
+
+  async findByUser(userId: number) {
     return await this.prisma.review.findMany({
-      where: {
-        userId: userId,
-      },
+      where: { userId },
     });
   }
 
   async findOne(id: number) {
-    return await this.prisma.review.findUnique({
-      where: {
-        id,
-      },
+    const review = await this.prisma.review.findUnique({
+      where: { id },
     });
+
+    if (!review) {
+      throw new NotFoundException('Review not found');
+    }
+
+    return review;
   }
 
   async update(id: number, updateReviewDto: UpdateReviewDto) {
     return await this.prisma.review.update({
-      where: {
-        id,
-      },
+      where: { id },
       data: updateReviewDto,
     });
   }
 
   async remove(id: number) {
     return await this.prisma.review.delete({
-      where: {
-        id,
-      },
+      where: { id },
     });
   }
 }
