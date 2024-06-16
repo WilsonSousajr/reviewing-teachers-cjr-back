@@ -5,9 +5,10 @@ import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class DisciplinesService {
-  constructor(private readonly prisma: PrismaService){}
+  constructor(private readonly prisma: PrismaService) {}
+
   async create(createDisciplineDto: CreateDisciplineDto) {
-    return await this.prisma.discipline.create({data: createDisciplineDto});
+    return await this.prisma.discipline.create({ data: createDisciplineDto });
   }
 
   async findAll() {
@@ -15,32 +16,35 @@ export class DisciplinesService {
   }
 
   async findByName(name: string) {
-    return await this.prisma.discipline.findFirst({where: {name}})
+    return await this.prisma.discipline.findFirst({
+      where: {
+        name: name,
+      },
+    });
   }
-  
 
   async findOne(id: number) {
-    return await this.prisma.discipline.findMany({
+    return await this.prisma.discipline.findUnique({
       where: {
-        id
-      }
+        id: id,
+      },
     });
   }
 
   async update(id: number, updateDisciplineDto: UpdateDisciplineDto) {
     return await this.prisma.discipline.update({
       where: {
-        id
+        id: id,
       },
-      data: updateDisciplineDto
+      data: updateDisciplineDto,
     });
   }
 
   async remove(id: number) {
     return await this.prisma.discipline.delete({
       where: {
-        id
-      }
+        id: id,
+      },
     });
   }
 }
