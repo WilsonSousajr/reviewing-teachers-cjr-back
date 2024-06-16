@@ -40,4 +40,10 @@ export class AuthController {
 
     return this.authService.register(createUserDto);
   }
+
+  @Post('validate-password')
+  async validatePassword(@Body() body: { userId: number; currentPassword: string }) {
+    const isValid = await this.authService.validatePassword(body.userId, body.currentPassword);
+    return { valid: isValid };
+  }
 }
