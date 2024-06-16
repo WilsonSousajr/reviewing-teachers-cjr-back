@@ -60,4 +60,12 @@ export class AuthService {
   async findUserById(id: number) {
     return await this.usersService.findOne(id);
   }
+
+  async validatePassword(userId: number, currentPassword: string): Promise<boolean> {
+    const user = await this.usersService.findOne(userId);
+    if (!user) {
+      return false;
+    }
+    return bcrypt.compare(currentPassword, user.password);
+  }
 }
